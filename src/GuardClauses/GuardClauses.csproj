@@ -7,8 +7,8 @@
 </ItemGroup>
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net60</TargetFrameworks>
-    <PackageId>Ardalis.GuardClauses</PackageId>
-    <Title>Ardalis.GuardClauses</Title>
+    <PackageId>Ardalis.GuardClauses.Custom</PackageId>
+    <Title>Ardalis.GuardClauses.Custom</Title>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Steve Smith (@ardalis)</Authors>
     <Company>Ardalis.com</Company>
