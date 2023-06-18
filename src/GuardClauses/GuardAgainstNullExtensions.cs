@@ -39,9 +39,9 @@ public static partial class GuardClauseExtensions
         {
             if (string.IsNullOrEmpty(message))
             {
-                throw new ArgumentNullException(parameterName);
+                throw new GuardNullException(parameterName);
             }
-            throw new ArgumentNullException(parameterName, message);
+            throw new GuardNullException(message, parameterName);
         }
 
         return input;
@@ -73,7 +73,7 @@ public static partial class GuardClauseExtensions
         Guard.Against.Null(input, parameterName, message);
         if (input == string.Empty)
         {
-            throw new ArgumentException(message ?? $"Required input {parameterName} was empty.", parameterName);
+            throw new GuardNullException(message ?? $"Required input {parameterName} was empty.", parameterName);
         }
 
         return input;
@@ -105,7 +105,7 @@ public static partial class GuardClauseExtensions
         Guard.Against.Null(input, parameterName, message);
         if (input == Guid.Empty)
         {
-            throw new ArgumentException(message ?? $"Required input {parameterName} was empty.", parameterName);
+            throw new GuardNullException(message ?? $"Required input {parameterName} was empty.", parameterName);
         }
 
         return input.Value;
@@ -137,7 +137,7 @@ public static partial class GuardClauseExtensions
         Guard.Against.Null(input, parameterName, message);
         if (!input.Any())
         {
-            throw new ArgumentException(message ?? $"Required input {parameterName} was empty.", parameterName);
+            throw new GuardNullException(message ?? $"Required input {parameterName} was empty.", parameterName);
         }
 
         return input;
@@ -169,7 +169,7 @@ public static partial class GuardClauseExtensions
         Guard.Against.NullOrEmpty(input, parameterName, message);
         if (String.IsNullOrWhiteSpace(input))
         {
-            throw new ArgumentException(message ?? $"Required input {parameterName} was empty.", parameterName);
+            throw new GuardNullException(message ?? $"Required input {parameterName} was empty.", parameterName);
         }
 
         return input;
@@ -198,7 +198,7 @@ public static partial class GuardClauseExtensions
     {
         if (EqualityComparer<T>.Default.Equals(input, default(T)!) || input is null)
         {
-            throw new ArgumentException(message ?? $"Parameter [{parameterName}] is default value for type {typeof(T).Name}", parameterName);
+            throw new GuardNullException(message ?? $"Parameter [{parameterName}] is default value for type {typeof(T).Name}", parameterName);
         }
 
         return input;

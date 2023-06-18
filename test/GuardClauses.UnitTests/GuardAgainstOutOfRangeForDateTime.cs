@@ -27,7 +27,7 @@ public class GuardAgainstOutOfRangeForDateTime
         DateTime input = DateTime.Now;
         DateTime rangeFrom = input.AddSeconds(rangeFromOffset);
         DateTime rangeTo = input.AddSeconds(rangeToOffset);
-        Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(input, "index", rangeFrom, rangeTo));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, "index", rangeFrom, rangeTo));
     }
 
     [Theory]
@@ -38,7 +38,7 @@ public class GuardAgainstOutOfRangeForDateTime
         DateTime input = DateTime.Now;
         DateTime rangeFrom = input.AddSeconds(rangeFromOffset);
         DateTime rangeTo = input.AddSeconds(rangeToOffset);
-        Assert.Throws<ArgumentException>(() => Guard.Against.OutOfRange(DateTime.Now, "index", rangeFrom, rangeTo));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(DateTime.Now, "index", rangeFrom, rangeTo));
     }
 
     [Theory]
@@ -60,7 +60,7 @@ public class GuardAgainstOutOfRangeForDateTime
     [InlineData("DateTime range", "DateTime range (Parameter 'parameterName')")]
     public void ErrorMessageMatchesExpected(string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(DateTime.Today.AddDays(-1), "parameterName",
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(DateTime.Today.AddDays(-1), "parameterName",
             DateTime.Today, DateTime.Today.AddDays(1), customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -74,7 +74,7 @@ public class GuardAgainstOutOfRangeForDateTime
     [InlineData("SomeOtherParameter", "Value must be correct")]
     public void ExceptionParamNameMatchesExpected(string expectedParamName, string customMessage)
     {
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(DateTime.Today.AddDays(-1), expectedParamName,
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(DateTime.Today.AddDays(-1), expectedParamName,
             DateTime.Today, DateTime.Today.AddDays(1), customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);

@@ -21,80 +21,80 @@ public class GuardAgainstNegativeOrZero
     [Fact]
     public void ThrowsGivenZeroIntValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(0, "intZero"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(0, "intZero"));
     }
 
     [Fact]
     public void ThrowsGivenZeroLongValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(0L, "longZero"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(0L, "longZero"));
     }
 
     [Fact]
     public void ThrowsGivenZeroDecimalValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(0M, "decimalZero"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(0M, "decimalZero"));
     }
 
     [Fact]
     public void ThrowsGivenZeroFloatValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(0f, "floatZero"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(0f, "floatZero"));
     }
 
     [Fact]
     public void ThrowsGivenZeroDoubleValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(0.0, "doubleZero"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(0.0, "doubleZero"));
     }
 
     [Fact]
     public void ThrowsGivenZeroTimeSpanValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(TimeSpan.Zero, "timespanZero"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(TimeSpan.Zero, "timespanZero"));
     }
 
 
     [Fact]
     public void ThrowsGivenNegativeIntValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(-1, "intNegative"));
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(-42, "intNegative"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(-1, "intNegative"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(-42, "intNegative"));
     }
 
     [Fact]
     public void ThrowsGivenNegativeLongValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(-1L, "longNegative"));
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(-456L, "longNegative"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(-1L, "longNegative"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(-456L, "longNegative"));
     }
 
     [Fact]
     public void ThrowsGivenNegativeDecimalValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(-1M, "decimalNegative"));
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(-567M, "decimalNegative"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(-1M, "decimalNegative"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(-567M, "decimalNegative"));
     }
 
     [Fact]
     public void ThrowsGivenNegativeFloatValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(-1f, "floatNegative"));
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(-4567f, "floatNegative"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(-1f, "floatNegative"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(-4567f, "floatNegative"));
     }
 
     [Fact]
     public void ThrowsGivenNegativeDoubleValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(-1.0, "doubleNegative"));
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(-456.453, "doubleNegative"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(-1.0, "doubleNegative"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(-456.453, "doubleNegative"));
     }
 
     [Fact]
     public void ThrowsGivenNegativeTimeSpanValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(TimeSpan.FromSeconds(-1), "timespanNegative"));
-        Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(TimeSpan.FromSeconds(-456), "timespanNegative"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(TimeSpan.FromSeconds(-1), "timespanNegative"));
+        Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(TimeSpan.FromSeconds(-456), "timespanNegative"));
     }
 
     [Fact]
@@ -115,7 +115,7 @@ public class GuardAgainstNegativeOrZero
     [InlineData(0, "Must be positive", "Must be positive (Parameter 'xyz')")]
     public void ErrorMessageMatchesExpectedWhenNameNotExplicitlyProvidedGivenIntValue(int xyz, string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -129,7 +129,7 @@ public class GuardAgainstNegativeOrZero
     [InlineData(0L, "Must be positive", "Must be positive (Parameter 'xyz')")]
     public void ErrorMessageMatchesExpectedWhenNameNotExplicitlyProvidedGivenLongValue(long xyz, string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -143,7 +143,7 @@ public class GuardAgainstNegativeOrZero
     [InlineData(0.0, "Must be positive", "Must be positive (Parameter 'xyz')")]
     public void ErrorMessageMatchesExpectedWhenNameNotExplicitlyProvidedGivenDecimalValue(decimal xyz, string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -157,7 +157,7 @@ public class GuardAgainstNegativeOrZero
     [InlineData(0.0, "Must be positive", "Must be positive (Parameter 'xyz')")]
     public void ErrorMessageMatchesExpectedWhenNameNotExplicitlyProvidedGivenFloatValue(float xyz, string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -171,7 +171,7 @@ public class GuardAgainstNegativeOrZero
     [InlineData(0.0, "Must be positive", "Must be positive (Parameter 'xyz')")]
     public void ErrorMessageMatchesExpectedWhenNameNotExplicitlyProvidedGivenDoubleValue(double xyz, string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -187,7 +187,7 @@ public class GuardAgainstNegativeOrZero
     {
         var xyz = TimeSpan.FromSeconds(change);
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.NegativeOrZero(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNegativeOrZeroException>(() => Guard.Against.NegativeOrZero(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -213,7 +213,7 @@ public class GuardAgainstNegativeOrZero
 
         foreach (var clauseToEvaluate in clausesToEvaluate)
         {
-            var exception = Assert.Throws<ArgumentException>(clauseToEvaluate);
+            var exception = Assert.Throws<GuardNegativeOrZeroException>(clauseToEvaluate);
             Assert.NotNull(exception);
             Assert.NotNull(exception.Message);
             Assert.Equal(expectedMessage, exception.Message);
@@ -243,7 +243,7 @@ public class GuardAgainstNegativeOrZero
 
         foreach (var clauseToEvaluate in clausesToEvaluate)
         {
-            var exception = Assert.Throws<ArgumentException>(clauseToEvaluate);
+            var exception = Assert.Throws<GuardNegativeOrZeroException>(clauseToEvaluate);
             Assert.NotNull(exception);
             Assert.Equal(expectedParamName, exception.ParamName);
         }

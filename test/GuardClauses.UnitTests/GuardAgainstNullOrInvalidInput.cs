@@ -12,7 +12,7 @@ public class GuardAgainstNullOrInvalidInput
     [ClassData(typeof(ArgumentNullExceptionClassData))]
     public void ThrowsArgumentNullExceptionWhenInputIsNull(string input, Func<string, bool> func)
     {
-        Assert.Throws<ArgumentNullException>("string",
+        Assert.Throws<GuardNullException>("string",
             () => Guard.Against.NullOrInvalidInput(input, "string", func));
     }
 
@@ -20,7 +20,7 @@ public class GuardAgainstNullOrInvalidInput
     [ClassData(typeof(ArgumentExceptionClassData))]
     public void ThrowsArgumentExceptionWhenInputIsInvalid(string input, Func<string, bool> func)
     {
-        Assert.Throws<ArgumentException>("string",
+        Assert.Throws<GuardInvalidException>("string",
             () => Guard.Against.NullOrInvalidInput(input, "string", func));
     }
 
@@ -33,10 +33,10 @@ public class GuardAgainstNullOrInvalidInput
     }
 
     [Theory]
-    [InlineData(null, "Input parameterName did not satisfy the options (Parameter 'parameterName')", typeof(ArgumentException), 10)]
-    [InlineData("Evaluation failed", "Evaluation failed (Parameter 'parameterName')", typeof(ArgumentException), 10)]
-    [InlineData(null, "Value cannot be null. (Parameter 'parameterName')", typeof(ArgumentNullException))]
-    [InlineData("Please provide correct value", "Please provide correct value (Parameter 'parameterName')", typeof(ArgumentNullException))]
+    [InlineData(null, "Input parameterName did not satisfy the options (Parameter 'parameterName')", typeof(GuardInvalidException), 10)]
+    [InlineData("Evaluation failed", "Evaluation failed (Parameter 'parameterName')", typeof(GuardInvalidException), 10)]
+    [InlineData(null, "Value cannot be null. (Parameter 'parameterName')", typeof(GuardNullException))]
+    [InlineData("Please provide correct value", "Please provide correct value (Parameter 'parameterName')", typeof(GuardNullException))]
     public void ErrorMessageMatchesExpected(string customMessage, string expectedMessage, Type exceptionType, int? input = null)
     {
         var exception = Assert.Throws(exceptionType,
@@ -48,18 +48,18 @@ public class GuardAgainstNullOrInvalidInput
     }
 
     [Theory]
-    [InlineData(null, null, typeof(ArgumentException), 10)]
-    [InlineData(null, "Please provide correct value", typeof(ArgumentException), 10)]
-    [InlineData("SomeParameter", null, typeof(ArgumentNullException))]
-    [InlineData("SomeOtherParameter", "Value must be correct", typeof(ArgumentNullException))]
+    [InlineData(null, null, typeof(GuardInvalidException), 10)]
+    [InlineData(null, "Please provide correct value", typeof(GuardInvalidException), 10)]
+    [InlineData("SomeParameter", null, typeof(GuardNullException))]
+    [InlineData("SomeOtherParameter", "Value must be correct", typeof(GuardNullException))]
     public void ExceptionParamNameMatchesExpected(string expectedParamName, string customMessage, Type exceptionType, int? input = null)
     {
         var exception = Assert.Throws(exceptionType,
             () => Guard.Against.NullOrInvalidInput(input, expectedParamName, x => x > 20, customMessage));
 
-        Assert.IsAssignableFrom<ArgumentException>(exception);
+        Assert.IsAssignableFrom<GuardNullException>(exception);
         Assert.NotNull(exception);
-        Assert.Equal(expectedParamName, (exception as ArgumentException)!.ParamName);
+        Assert.Equal(expectedParamName, (exception as GuardNullException)!.ParamName);
     }
 
     public class ValidClassData : IEnumerable<object[]>

@@ -27,7 +27,7 @@ public class GuardAgainstInvalidFormatTests
     [InlineData("", @"\d+")]
     public void ThrowsGivenGivenIncorrectFormat(string input, string regexPattern)
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.InvalidFormat(input, nameof(input), regexPattern));
+        Assert.Throws<GuardInvalidException>(() => Guard.Against.InvalidFormat(input, nameof(input), regexPattern));
     }
 
     [Theory]
@@ -35,7 +35,7 @@ public class GuardAgainstInvalidFormatTests
     [InlineData("Please provide value in a correct format", "Please provide value in a correct format (Parameter 'parameterName')")]
     public void ErrorMessageMatchesExpected(string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.InvalidFormat("aaa", "parameterName", "^b", customMessage));
+        var exception = Assert.Throws<GuardInvalidException>(() => Guard.Against.InvalidFormat("aaa", "parameterName", "^b", customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -48,7 +48,7 @@ public class GuardAgainstInvalidFormatTests
     [InlineData("SomeOtherParameter", "Value must be correct")]
     public void ExceptionParamNameMatchesExpected(string expectedParamName, string customMessage)
     {
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.InvalidFormat("aaa", expectedParamName, "^b", customMessage));
+        var exception = Assert.Throws<GuardInvalidException>(() => Guard.Against.InvalidFormat("aaa", expectedParamName, "^b", customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }

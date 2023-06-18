@@ -6,7 +6,7 @@ namespace Ardalis.GuardClauses;
 public static partial class GuardClauseExtensions
 {
     /// <summary>
-    /// Throws an <see cref="NotFoundException" /> if <paramref name="input" /> with <paramref name="key" /> is not found.
+    /// Throws an <see cref="GuardNotFoundException" /> if <paramref name="input" /> with <paramref name="key" /> is not found.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="guardClause"></param>
@@ -14,7 +14,7 @@ public static partial class GuardClauseExtensions
     /// <param name="input"></param>
     /// <param name="parameterName"></param>
     /// <returns><paramref name="input" /> if the value is not null.</returns>
-    /// <exception cref="NotFoundException"></exception>
+    /// <exception cref="GuardNotFoundException"></exception>
 #if NETSTANDARD || NETFRAMEWORK
     public static T NotFound<T>(this IGuardClause guardClause,
         [NotNull][ValidatedNotNull] string key,
@@ -31,14 +31,14 @@ public static partial class GuardClauseExtensions
 
         if (input is null)
         {
-            throw new NotFoundException(key, parameterName!);
+            throw new GuardNotFoundException(key, parameterName!);
         }
 
         return input;
     }
 
     /// <summary>
-    /// Throws an <see cref="NotFoundException" /> if <paramref name="input" /> with <paramref name="key" /> is not found.
+    /// Throws an <see cref="GuardNotFoundException" /> if <paramref name="input" /> with <paramref name="key" /> is not found.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TKey"></typeparam>
@@ -47,7 +47,7 @@ public static partial class GuardClauseExtensions
     /// <param name="input"></param>
     /// <param name="parameterName"></param>
     /// <returns><paramref name="input" /> if the value is not null.</returns>
-    /// <exception cref="NotFoundException"></exception>
+    /// <exception cref="GuardNotFoundException"></exception>
 #if NETSTANDARD || NETFRAMEWORK
     public static T NotFound<TKey, T>(this IGuardClause guardClause,
         [NotNull][ValidatedNotNull] TKey key,
@@ -65,7 +65,7 @@ public static partial class GuardClauseExtensions
         if (input is null)
         {
             // TODO: Can we safely consider that ToString() won't return null for struct?
-            throw new NotFoundException(key.ToString()!, parameterName!);
+            throw new GuardNotFoundException(key.ToString()!, parameterName!);
         }
 
         return input;

@@ -33,38 +33,38 @@ public class GuardAgainstNullOrEmpty
     public void ThrowsGivenNullString()
     {
         string? nullString = null;
-        Assert.Throws<ArgumentNullException>(() => Guard.Against.NullOrEmpty(nullString, "nullString"));
+        Assert.Throws<GuardNullException>(() => Guard.Against.NullOrEmpty(nullString, "nullString"));
     }
 
     [Fact]
     public void ThrowsGivenEmptyString()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NullOrEmpty("", "emptyString"));
+        Assert.Throws<GuardNullException>(() => Guard.Against.NullOrEmpty("", "emptyString"));
     }
 
     [Fact]
     public void ThrowsGivenEmptyStringSpan()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Empty("".AsSpan(), "emptyStringSpan"));
+        Assert.Throws<GuardNullException>(() => Guard.Against.Empty("".AsSpan(), "emptyStringSpan"));
     }
 
     [Fact]
     public void ThrowsGivenNullGuid()
     {
         Guid? nullGuid = null;
-        Assert.Throws<ArgumentNullException>(() => Guard.Against.NullOrEmpty(nullGuid, "nullGuid"));
+        Assert.Throws<GuardNullException>(() => Guard.Against.NullOrEmpty(nullGuid, "nullGuid"));
     }
 
     [Fact]
     public void ThrowsGivenEmptyGuid()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NullOrEmpty(Guid.Empty, "emptyGuid"));
+        Assert.Throws<GuardNullException>(() => Guard.Against.NullOrEmpty(Guid.Empty, "emptyGuid"));
     }
 
     [Fact]
     public void ThrowsGivenEmptyEnumerable()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NullOrEmpty(Enumerable.Empty<string>(), "emptyStringEnumerable"));
+        Assert.Throws<GuardNullException>(() => Guard.Against.NullOrEmpty(Enumerable.Empty<string>(), "emptyStringEnumerable"));
     }
 
     [Fact]
@@ -87,7 +87,7 @@ public class GuardAgainstNullOrEmpty
     {
         string xyz = string.Empty;
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.NullOrEmpty(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNullException>(() => Guard.Against.NullOrEmpty(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -101,7 +101,7 @@ public class GuardAgainstNullOrEmpty
     {
         Guid xyz = Guid.Empty;
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.NullOrEmpty(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNullException>(() => Guard.Against.NullOrEmpty(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -115,7 +115,7 @@ public class GuardAgainstNullOrEmpty
     {
         IEnumerable<string> xyz = Enumerable.Empty<string>();
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.NullOrEmpty(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNullException>(() => Guard.Against.NullOrEmpty(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -140,7 +140,7 @@ public class GuardAgainstNullOrEmpty
 
         foreach (var clauseToEvaluate in clausesToEvaluate)
         {
-            var exception = Assert.Throws<ArgumentException>(clauseToEvaluate);
+            var exception = Assert.Throws<GuardNullException>(clauseToEvaluate);
             Assert.NotNull(exception);
             Assert.NotNull(exception.Message);
             Assert.Equal(expectedMessage, exception.Message);
@@ -165,7 +165,7 @@ public class GuardAgainstNullOrEmpty
 
         foreach (var clauseToEvaluate in clausesToEvaluate)
         {
-            var exception = Assert.Throws<ArgumentNullException>(clauseToEvaluate);
+            var exception = Assert.Throws<GuardNullException>(clauseToEvaluate);
             Assert.NotNull(exception);
             Assert.NotNull(exception.Message);
             Assert.Equal(expectedMessage, exception.Message);
@@ -192,7 +192,7 @@ public class GuardAgainstNullOrEmpty
 
         foreach (var clauseToEvaluate in clausesToEvaluate)
         {
-            var exception = Assert.Throws<ArgumentException>(clauseToEvaluate);
+            var exception = Assert.Throws<GuardNullException>(clauseToEvaluate);
             Assert.NotNull(exception);
             Assert.Equal(expectedParamName, exception.ParamName);
         }
@@ -218,7 +218,7 @@ public class GuardAgainstNullOrEmpty
 
         foreach (var clauseToEvaluate in clausesToEvaluate)
         {
-            var exception = Assert.Throws<ArgumentNullException>(clauseToEvaluate);
+            var exception = Assert.Throws<GuardNullException>(clauseToEvaluate);
             Assert.NotNull(exception);
             Assert.Equal(expectedParamName, exception.ParamName);
         }

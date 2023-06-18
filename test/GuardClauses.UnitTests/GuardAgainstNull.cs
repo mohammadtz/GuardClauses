@@ -20,7 +20,7 @@ public class GuardAgainstNull
     public void ThrowsGivenNullValue()
     {
         object obj = null!;
-        Assert.Throws<ArgumentNullException>(() => Guard.Against.Null(obj, "null"));
+        Assert.Throws<GuardNullException>(() => Guard.Against.Null(obj, "null"));
     }
 
     [Fact]
@@ -45,7 +45,7 @@ public class GuardAgainstNull
     public void ErrorMessageMatchesExpected(string customMessage, string expectedMessage)
     {
         string? nullString = null;
-        var exception = Assert.Throws<ArgumentNullException>(() => Guard.Against.Null(nullString, "parameterName", customMessage));
+        var exception = Assert.Throws<GuardNullException>(() => Guard.Against.Null(nullString, "parameterName", customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -56,7 +56,7 @@ public class GuardAgainstNull
     {
         string? xyz = null;
 
-        var exception = Assert.Throws<ArgumentNullException>(() => Guard.Against.Null(xyz));
+        var exception = Assert.Throws<GuardNullException>(() => Guard.Against.Null(xyz));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -71,7 +71,7 @@ public class GuardAgainstNull
     public void ExceptionParamNameMatchesExpected(string expectedParamName, string customMessage)
     {
         string? nullString = null;
-        var exception = Assert.Throws<ArgumentNullException>(() => Guard.Against.Null(nullString, expectedParamName, customMessage));
+        var exception = Assert.Throws<GuardNullException>(() => Guard.Against.Null(nullString, expectedParamName, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }

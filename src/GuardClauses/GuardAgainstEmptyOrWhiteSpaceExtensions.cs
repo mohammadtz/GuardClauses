@@ -21,7 +21,7 @@ public static partial class GuardClauseExtensions
     {
         if (input.Length == 0 || input == string.Empty)
         {
-            throw new ArgumentException(message ?? $"Required input {parameterName} was empty.", parameterName);
+            throw new GuardNullException(message ?? $"Required input {parameterName} was empty.", parameterName);
         }
         return input;
     }
@@ -42,7 +42,7 @@ public static partial class GuardClauseExtensions
     {
         if (MemoryExtensions.IsWhiteSpace(input))
         {
-            throw new ArgumentException(message ?? $"Required input {parameterName} was empty.", parameterName);
+            throw new GuardNullException(message ?? $"Required input {parameterName} was empty.", parameterName);
         }
 
         return input;

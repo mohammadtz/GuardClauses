@@ -172,7 +172,7 @@ public static partial class GuardClauseExtensions
     {
         if (input.CompareTo(default(T)) < 0)
         {
-            throw new ArgumentException(message ?? $"Required input {parameterName} cannot be negative.", parameterName);
+            throw new GuardNegativeException(message ?? $"Required input {parameterName} cannot be negative.", parameterName);
         }
 
         return input;
@@ -339,7 +339,7 @@ public static partial class GuardClauseExtensions
     {
         if (input.CompareTo(default(T)) <= 0)
         {
-            throw new ArgumentException(message ?? $"Required input {parameterName} cannot be zero or negative.", parameterName);
+            throw new GuardNegativeOrZeroException(message ?? $"Required input {parameterName} cannot be zero or negative.", parameterName);
         }
 
         return input;

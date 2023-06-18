@@ -22,19 +22,19 @@ public class GuardAgainstNullOrWhiteSpace
     [Fact]
     public void ThrowsGivenNullValue()
     {
-        Assert.Throws<ArgumentNullException>(() => Guard.Against.NullOrWhiteSpace(null, "null"));
+        Assert.Throws<GuardNullException>(() => Guard.Against.NullOrWhiteSpace(null, "null"));
     }
 
     [Fact]
     public void ThrowsGivenEmptyString()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NullOrWhiteSpace("", "emptystring"));
+        Assert.Throws<GuardNullException>(() => Guard.Against.NullOrWhiteSpace("", "emptystring"));
     }
 
     [Fact]
     public void ThrowsGivenEmptyStringSpan()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.WhiteSpace("".AsSpan(), "emptyStringSpan"));
+        Assert.Throws<GuardNullException>(() => Guard.Against.WhiteSpace("".AsSpan(), "emptyStringSpan"));
     }
 
     [Theory]
@@ -42,8 +42,8 @@ public class GuardAgainstNullOrWhiteSpace
     [InlineData("   ")]
     public void ThrowsGivenWhiteSpaceString(string whiteSpaceString)
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.NullOrWhiteSpace(whiteSpaceString, "whitespacestring"));
-        Assert.Throws<ArgumentException>(() => Guard.Against.WhiteSpace(whiteSpaceString.AsSpan(), "whiteSpaceStringSpan"));
+        Assert.Throws<GuardNullException>(() => Guard.Against.NullOrWhiteSpace(whiteSpaceString, "whitespacestring"));
+        Assert.Throws<GuardNullException>(() => Guard.Against.WhiteSpace(whiteSpaceString.AsSpan(), "whiteSpaceStringSpan"));
     }
 
     [Theory]
@@ -64,7 +64,7 @@ public class GuardAgainstNullOrWhiteSpace
     [InlineData("Value is empty", "Value is empty (Parameter 'parameterName')")]
     public void ErrorMessageMatchesExpectedWhenInputIsWhiteSpace(string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.NullOrWhiteSpace(" ", "parameterName", customMessage));
+        var exception = Assert.Throws<GuardNullException>(() => Guard.Against.NullOrWhiteSpace(" ", "parameterName", customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -76,7 +76,7 @@ public class GuardAgainstNullOrWhiteSpace
     public void ErrorMessageMatchesExpectedWhenInputIsNull(string customMessage, string expectedMessage)
     {
         string? nullString = null;
-        var exception = Assert.Throws<ArgumentNullException>(() => Guard.Against.NullOrWhiteSpace(nullString, "parameterName", customMessage));
+        var exception = Assert.Throws<GuardNullException>(() => Guard.Against.NullOrWhiteSpace(nullString, "parameterName", customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -88,7 +88,7 @@ public class GuardAgainstNullOrWhiteSpace
     public void ErrorMessageMatchesExpectedWhenNameNotExplicitlyProvided(string customMessage, string expectedMessage)
     {
         string? xyz = null;
-        var exception = Assert.Throws<ArgumentNullException>(() => Guard.Against.NullOrWhiteSpace(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNullException>(() => Guard.Against.NullOrWhiteSpace(xyz, message: customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -101,7 +101,7 @@ public class GuardAgainstNullOrWhiteSpace
     [InlineData("SomeOtherParameter", "Value must be correct")]
     public void ExceptionParamNameMatchesExpectedWhenInputIsWhiteSpace(string expectedParamName, string customMessage)
     {
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.NullOrWhiteSpace(" ", expectedParamName, customMessage));
+        var exception = Assert.Throws<GuardNullException>(() => Guard.Against.NullOrWhiteSpace(" ", expectedParamName, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }
@@ -114,7 +114,7 @@ public class GuardAgainstNullOrWhiteSpace
     public void ExceptionParamNameMatchesExpectedWhenInputIsNull(string expectedParamName, string customMessage)
     {
         string? nullString = null;
-        var exception = Assert.Throws<ArgumentNullException>(() => Guard.Against.NullOrWhiteSpace(nullString, expectedParamName, customMessage));
+        var exception = Assert.Throws<GuardNullException>(() => Guard.Against.NullOrWhiteSpace(nullString, expectedParamName, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }

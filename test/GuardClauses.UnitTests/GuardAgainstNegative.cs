@@ -32,37 +32,37 @@ public class GuardAgainstNegative
     [Fact]
     public void ThrowsGivenNegativeIntValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Negative(-1, "negative"));
+        Assert.Throws<GuardNegativeException>(() => Guard.Against.Negative(-1, "negative"));
     }
 
     [Fact]
     public void ThrowsGivenNegativeLongValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Negative(-1L, "negative"));
+        Assert.Throws<GuardNegativeException>(() => Guard.Against.Negative(-1L, "negative"));
     }
 
     [Fact]
     public void ThrowsGivenNegativeDecimalValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Negative(-1.0M, "negative"));
+        Assert.Throws<GuardNegativeException>(() => Guard.Against.Negative(-1.0M, "negative"));
     }
 
     [Fact]
     public void ThrowsGivenNegativeFloatValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Negative(-1.0f, "negative"));
+        Assert.Throws<GuardNegativeException>(() => Guard.Against.Negative(-1.0f, "negative"));
     }
 
     [Fact]
     public void ThrowsGivenNegativeDoubleValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Negative(-1.0, "negative"));
+        Assert.Throws<GuardNegativeException>(() => Guard.Against.Negative(-1.0, "negative"));
     }
 
     [Fact]
     public void ThrowsGivenNegativeTimeSpanValue()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Negative(TimeSpan.FromSeconds(-1), "negative"));
+        Assert.Throws<GuardNegativeException>(() => Guard.Against.Negative(TimeSpan.FromSeconds(-1), "negative"));
     }
 
     [Fact]
@@ -114,7 +114,7 @@ public class GuardAgainstNegative
     {
         var xyz = -1;
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.Negative(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNegativeException>(() => Guard.Against.Negative(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -128,7 +128,7 @@ public class GuardAgainstNegative
     {
         var xyz = -1L;
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.Negative(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNegativeException>(() => Guard.Against.Negative(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -142,7 +142,7 @@ public class GuardAgainstNegative
     {
         var xyz = -1.0M;
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.Negative(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNegativeException>(() => Guard.Against.Negative(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -156,7 +156,7 @@ public class GuardAgainstNegative
     {
         var xyz = -1.0f;
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.Negative(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNegativeException>(() => Guard.Against.Negative(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -170,7 +170,7 @@ public class GuardAgainstNegative
     {
         var xyz = -1.0;
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.Negative(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNegativeException>(() => Guard.Against.Negative(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -184,7 +184,7 @@ public class GuardAgainstNegative
     {
         var xyz = TimeSpan.FromSeconds(-1);
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.Negative(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNegativeException>(() => Guard.Against.Negative(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -208,7 +208,7 @@ public class GuardAgainstNegative
 
         foreach (var clauseToEvaluate in clausesToEvaluate)
         {
-            var exception = Assert.Throws<ArgumentException>(clauseToEvaluate);
+            var exception = Assert.Throws<GuardNegativeException>(clauseToEvaluate);
             Assert.NotNull(exception);
             Assert.NotNull(exception.Message);
             Assert.Equal(expectedMessage, exception.Message);
@@ -234,7 +234,7 @@ public class GuardAgainstNegative
 
         foreach (var clauseToEvaluate in clausesToEvaluate)
         {
-            var exception = Assert.Throws<ArgumentException>(clauseToEvaluate);
+            var exception = Assert.Throws<GuardNegativeException>(clauseToEvaluate);
             Assert.NotNull(exception);
             Assert.Equal(expectedParamName, exception.ParamName);
         }

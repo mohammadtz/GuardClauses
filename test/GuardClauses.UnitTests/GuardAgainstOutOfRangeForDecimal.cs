@@ -22,7 +22,7 @@ public class GuardAgainstOutOfRangeForDecimal
     [InlineData(4.0, 1.0, 3.0)]
     public void ThrowsGivenOutOfRangeValue(decimal input, decimal rangeFrom, decimal rangeTo)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(input, "index", rangeFrom, rangeTo));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, "index", rangeFrom, rangeTo));
     }
 
     [Theory]
@@ -31,7 +31,7 @@ public class GuardAgainstOutOfRangeForDecimal
     [InlineData(4.0, 3.0, 1.0)]
     public void ThrowsGivenInvalidArgumentValue(decimal input, decimal rangeFrom, decimal rangeTo)
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.OutOfRange(input, "index", rangeFrom, rangeTo));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, "index", rangeFrom, rangeTo));
     }
 
     [Theory]
@@ -49,7 +49,7 @@ public class GuardAgainstOutOfRangeForDecimal
     [InlineData("Decimal range", "Decimal range (Parameter 'parameterName')")]
     public void ErrorMessageMatchesExpected(string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(3.0, "parameterName", 0.0, 1.0, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(3.0, "parameterName", 0.0, 1.0, customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -62,7 +62,7 @@ public class GuardAgainstOutOfRangeForDecimal
     [InlineData("SomeOtherParameter", "Value must be correct")]
     public void ExceptionParamNameMatchesExpected(string expectedParamName, string customMessage)
     {
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(3.0, expectedParamName, 0.0, 1.0, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(3.0, expectedParamName, 0.0, 1.0, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }

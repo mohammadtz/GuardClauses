@@ -160,7 +160,7 @@ public static partial class GuardClauseExtensions
     {
         if (EqualityComparer<T>.Default.Equals(input, default(T)))
         {
-            throw new ArgumentException(message ?? $"Required input {parameterName} cannot be zero.", parameterName);
+            throw new GuardZeroException(message ?? $"Required input {parameterName} cannot be zero.", parameterName);
         }
 
         return input;

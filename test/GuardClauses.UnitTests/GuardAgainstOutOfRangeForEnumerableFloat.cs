@@ -19,14 +19,14 @@ public class GuardAgainstOutOfRangeForEnumerableFloat
     [ClassData(typeof(IncorrectClassData))]
     public void ThrowsGivenOutOfRangeValue(IEnumerable<float> input, float rangeFrom, float rangeTo)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(input, nameof(input), rangeFrom, rangeTo));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, nameof(input), rangeFrom, rangeTo));
     }
 
     [Theory]
     [ClassData(typeof(IncorrectRangeClassData))]
     public void ThrowsGivenInvalidArgumentValue(IEnumerable<float> input, float rangeFrom, float rangeTo)
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.OutOfRange(input, nameof(input), rangeFrom, rangeTo));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, nameof(input), rangeFrom, rangeTo));
     }
 
     [Theory]
@@ -46,7 +46,7 @@ public class GuardAgainstOutOfRangeForEnumerableFloat
         float rangeFrom = 2f;
         float rangeTo = 1f;
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.OutOfRange(input, "parameterName", rangeFrom, rangeTo, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, "parameterName", rangeFrom, rangeTo, customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -63,7 +63,7 @@ public class GuardAgainstOutOfRangeForEnumerableFloat
         float rangeFrom = 2f;
         float rangeTo = 1f;
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.OutOfRange(input, expectedParamName, rangeFrom, rangeTo, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, expectedParamName, rangeFrom, rangeTo, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }
@@ -77,7 +77,7 @@ public class GuardAgainstOutOfRangeForEnumerableFloat
         float rangeFrom = 0f;
         float rangeTo = 1f;
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(input, "parameterName", rangeFrom, rangeTo, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, "parameterName", rangeFrom, rangeTo, customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -94,7 +94,7 @@ public class GuardAgainstOutOfRangeForEnumerableFloat
         float rangeFrom = 0f;
         float rangeTo = 1f;
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(input, expectedParamName, rangeFrom, rangeTo, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, expectedParamName, rangeFrom, rangeTo, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }

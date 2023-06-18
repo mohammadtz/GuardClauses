@@ -21,7 +21,7 @@ public class GuardAgainstOutOfRangeForUint
     [InlineData(4, 1, 3)]
     public void ThrowsGivenOutOfRangeValue(uint input, uint rangeFrom, uint rangeTo)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(input, "index", rangeFrom, rangeTo));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, "index", rangeFrom, rangeTo));
     }
 
     [Theory]
@@ -30,7 +30,7 @@ public class GuardAgainstOutOfRangeForUint
     [InlineData(4, 3, 1)]
     public void ThrowsGivenInvalidArgumentValue(uint input, uint rangeFrom, uint rangeTo)
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.OutOfRange(input, "index", rangeFrom, rangeTo));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, "index", rangeFrom, rangeTo));
     }
 
     [Theory]
@@ -48,7 +48,7 @@ public class GuardAgainstOutOfRangeForUint
     [InlineData("Uint range", "Uint range (Parameter 'parameterName')")]
     public void ErrorMessageMatchesExpected(string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange((uint)3.0d, "parameterName", (uint)0.0d, (uint)1.0d, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange((uint)3.0d, "parameterName", (uint)0.0d, (uint)1.0d, customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -61,7 +61,7 @@ public class GuardAgainstOutOfRangeForUint
     [InlineData("SomeOtherParameter", "Value must be correct")]
     public void ExceptionParamNameMatchesExpected(string expectedParamName, string customMessage)
     {
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange((uint)3.0d, expectedParamName, (uint)0.0d, (uint)1.0d, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange((uint)3.0d, expectedParamName, (uint)0.0d, (uint)1.0d, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }

@@ -20,11 +20,11 @@ public class GuardAgainstDefault
     [Fact]
     public void ThrowsGivenDefaultValue()
     {
-        Assert.Throws<ArgumentException>("string", () => Guard.Against.Default(default(string), "string"));
-        Assert.Throws<ArgumentException>("int", () => Guard.Against.Default(default(int), "int"));
-        Assert.Throws<ArgumentException>("guid", () => Guard.Against.Default(default(Guid), "guid"));
-        Assert.Throws<ArgumentException>("datetime", () => Guard.Against.Default(default(DateTime), "datetime"));
-        Assert.Throws<ArgumentException>("object", () => Guard.Against.Default(default(object), "object"));
+        Assert.Throws<GuardNullException>("string", () => Guard.Against.Default(default(string), "string"));
+        Assert.Throws<GuardNullException>("int", () => Guard.Against.Default(default(int), "int"));
+        Assert.Throws<GuardNullException>("guid", () => Guard.Against.Default(default(Guid), "guid"));
+        Assert.Throws<GuardNullException>("datetime", () => Guard.Against.Default(default(DateTime), "datetime"));
+        Assert.Throws<GuardNullException>("object", () => Guard.Against.Default(default(object), "object"));
     }
 
     [Theory]
@@ -40,7 +40,7 @@ public class GuardAgainstDefault
     [InlineData("Please provide correct value", "Please provide correct value (Parameter 'parameterName')")]
     public void ErrorMessageMatchesExpected(string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.Default(default(string), "parameterName", customMessage));
+        var exception = Assert.Throws<GuardNullException>(() => Guard.Against.Default(default(string), "parameterName", customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -52,7 +52,7 @@ public class GuardAgainstDefault
     public void ErrorMessageMatchesExpectedWhenNameNotExplicitlyProvided(string customMessage, string expectedMessage)
     {
         var xyz = default(string);
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.Default(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardNullException>(() => Guard.Against.Default(xyz, message: customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -65,7 +65,7 @@ public class GuardAgainstDefault
     [InlineData("SomeOtherParameter", "Value must be correct")]
     public void ExceptionParamNameMatchesExpected(string expectedParamName, string customMessage)
     {
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.Default(default(string), expectedParamName, customMessage));
+        var exception = Assert.Throws<GuardNullException>(() => Guard.Against.Default(default(string), expectedParamName, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }

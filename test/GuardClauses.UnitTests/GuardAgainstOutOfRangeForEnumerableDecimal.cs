@@ -19,14 +19,14 @@ public class GuardAgainstOutOfRangeForEnumerableDecimal
     [ClassData(typeof(IncorrectClassData))]
     public void ThrowsGivenOutOfRangeValue(IEnumerable<decimal> input, decimal rangeFrom, decimal rangeTo)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(input, nameof(input), rangeFrom, rangeTo));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, nameof(input), rangeFrom, rangeTo));
     }
 
     [Theory]
     [ClassData(typeof(IncorrectRangeClassData))]
     public void ThrowsGivenInvalidArgumentValue(IEnumerable<decimal> input, decimal rangeFrom, decimal rangeTo)
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.OutOfRange(input, nameof(input), rangeFrom, rangeTo));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, nameof(input), rangeFrom, rangeTo));
     }
 
     [Theory]
@@ -46,7 +46,7 @@ public class GuardAgainstOutOfRangeForEnumerableDecimal
         decimal rangeFrom = 2m;
         decimal rangeTo = 1m;
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.OutOfRange(input, "parameterName", rangeFrom, rangeTo, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, "parameterName", rangeFrom, rangeTo, customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -63,7 +63,7 @@ public class GuardAgainstOutOfRangeForEnumerableDecimal
         decimal rangeFrom = 2m;
         decimal rangeTo = 1m;
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.OutOfRange(input, expectedParamName, rangeFrom, rangeTo, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, expectedParamName, rangeFrom, rangeTo, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }
@@ -77,7 +77,7 @@ public class GuardAgainstOutOfRangeForEnumerableDecimal
         decimal rangeFrom = 0m;
         decimal rangeTo = 1m;
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(input, "parameterName", rangeFrom, rangeTo, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, "parameterName", rangeFrom, rangeTo, customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -94,7 +94,7 @@ public class GuardAgainstOutOfRangeForEnumerableDecimal
         decimal rangeFrom = 0m;
         decimal rangeTo = 1m;
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(input, expectedParamName, rangeFrom, rangeTo, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(input, expectedParamName, rangeFrom, rangeTo, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }

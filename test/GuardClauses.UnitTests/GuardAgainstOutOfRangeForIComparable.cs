@@ -26,7 +26,7 @@ public class GuardAgainstOutOfRangeForIComparable
     [InlineData(11, 10, 1, 1, 10, 10)]
     public void ThrowsGivenOutOfRangeValue(int input1, int input2, int rangeFrom1, int rangeFrom2, int rangeTo1, int rangeTo2)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange((input1, input2), "tuple", (rangeFrom1, rangeFrom2), (rangeTo1, rangeTo2)));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange((input1, input2), "tuple", (rangeFrom1, rangeFrom2), (rangeTo1, rangeTo2)));
     }
 
     [Theory]
@@ -36,7 +36,7 @@ public class GuardAgainstOutOfRangeForIComparable
     [InlineData(11, 10, 10, 10, 1, 1)]
     public void ThrowsGivenInvalidArgumentValue(int input1, int input2, int rangeFrom1, int rangeFrom2, int rangeTo1, int rangeTo2)
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.OutOfRange((input1, input2), "tuple", (rangeFrom1, rangeFrom2), (rangeTo1, rangeTo2)));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange((input1, input2), "tuple", (rangeFrom1, rangeFrom2), (rangeTo1, rangeTo2)));
     }
 
     [Theory]
@@ -55,7 +55,7 @@ public class GuardAgainstOutOfRangeForIComparable
     [InlineData("Tuple range", "Tuple range (Parameter 'parameterName')")]
     public void ErrorMessageMatchesExpected(string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange((1, 2), "parameterName", (3, 3), (9, 9), customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange((1, 2), "parameterName", (3, 3), (9, 9), customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -68,7 +68,7 @@ public class GuardAgainstOutOfRangeForIComparable
     [InlineData("SomeOtherParameter", "Value must be correct")]
     public void ExceptionParamNameMatchesExpected(string expectedParamName, string customMessage)
     {
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange((1, 2), expectedParamName, (3, 3), (9, 9), customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange((1, 2), expectedParamName, (3, 3), (9, 9), customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }

@@ -27,31 +27,31 @@ public class GuardAgainstZero
     [Fact]
     public void ThrowsGivenZeroValueIntZero()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Zero(0, "zero"));
+        Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(0, "zero"));
     }
 
     [Fact]
     public void ThrowsGivenZeroValueLongZero()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Zero(0L, "zero"));
+        Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(0L, "zero"));
     }
 
     [Fact]
     public void ThrowsGivenZeroValueDecimalZero()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Zero(0.0M, "zero"));
+        Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(0.0M, "zero"));
     }
 
     [Fact]
     public void ThrowsGivenZeroValueFloatZero()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Zero(0.0f, "zero"));
+        Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(0.0f, "zero"));
     }
 
     [Fact]
     public void ThrowsGivenZeroValueDoubleZero()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Zero(0.0, "zero"));
+        Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(0.0, "zero"));
     }
 
 
@@ -59,38 +59,38 @@ public class GuardAgainstZero
     [Fact]
     public void ThrowsGivenZeroValueDefaultInt()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Zero(default(int), "zero"));
+        Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(default(int), "zero"));
     }
 
     [Fact]
     public void ThrowsGivenZeroValueDefaultLong()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Zero(default(long), "zero"));
+        Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(default(long), "zero"));
     }
 
     [Fact]
     public void ThrowsGivenZeroValueDefaultDecimal()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Zero(default(decimal), "zero"));
+        Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(default(decimal), "zero"));
     }
 
     [Fact]
     public void ThrowsGivenZeroValueDefaultFloat()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Zero(default(float), "zero"));
+        Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(default(float), "zero"));
     }
 
     [Fact]
     public void ThrowsGivenZeroValueDefaultDouble()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Zero(default(double), "zero"));
+        Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(default(double), "zero"));
     }
 
 
     [Fact]
     public void ThrowsGivenZeroValueDecimalDotZero()
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.Zero(decimal.Zero, "zero"));
+        Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(decimal.Zero, "zero"));
     }
 
     [Fact]
@@ -126,7 +126,7 @@ public class GuardAgainstZero
 
         foreach (var clauseToEvaluate in clausesToEvaluate)
         {
-            var exception = Assert.Throws<ArgumentException>(clauseToEvaluate);
+            var exception = Assert.Throws<GuardZeroException>(clauseToEvaluate);
 
             Assert.NotNull(exception);
             Assert.NotNull(exception.Message);
@@ -140,7 +140,7 @@ public class GuardAgainstZero
     public void ErrorMessageMatchesExpectedWhenNameNotExplicitlyProvidedGivenIntValue(string customMessage, string expectedMessage)
     {
         var xyz = 0;
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.Zero(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -153,7 +153,7 @@ public class GuardAgainstZero
     public void ErrorMessageMatchesExpectedWhenNameNotExplicitlyProvidedGivenLongValue(string customMessage, string expectedMessage)
     {
         var xyz = 0L;
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.Zero(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -166,7 +166,7 @@ public class GuardAgainstZero
     public void ErrorMessageMatchesExpectedWhenNameNotExplicitlyProvidedGivenDecimalValue(string customMessage, string expectedMessage)
     {
         var xyz = 0.0M;
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.Zero(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -179,7 +179,7 @@ public class GuardAgainstZero
     public void ErrorMessageMatchesExpectedWhenNameNotExplicitlyProvidedGivenFloatValue(string customMessage, string expectedMessage)
     {
         var xyz = 0.0f;
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.Zero(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -192,7 +192,7 @@ public class GuardAgainstZero
     public void ErrorMessageMatchesExpectedWhenNameNotExplicitlyProvidedGivenDoubleValue(string customMessage, string expectedMessage)
     {
         var xyz = 0.0;
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.Zero(xyz, message: customMessage));
+        var exception = Assert.Throws<GuardZeroException>(() => Guard.Against.Zero(xyz, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -217,7 +217,7 @@ public class GuardAgainstZero
 
         foreach (var clauseToEvaluate in clausesToEvaluate)
         {
-            var exception = Assert.Throws<ArgumentException>(clauseToEvaluate);
+            var exception = Assert.Throws<GuardZeroException>(clauseToEvaluate);
             Assert.NotNull(exception);
             Assert.Equal(expectedParamName, exception.ParamName);
         }

@@ -34,9 +34,9 @@ public static partial class GuardClauseExtensions
         {
             if (string.IsNullOrEmpty(message))
             {
-                throw new InvalidEnumArgumentException(parameterName, input, typeof(T));
+                throw new GuardEnumOutOfRangeException(parameterName, input, typeof(T));
             }
-            throw new InvalidEnumArgumentException(message);
+            throw new GuardEnumOutOfRangeException(message);
         }
 
         return input;
@@ -68,9 +68,9 @@ public static partial class GuardClauseExtensions
         {
             if (string.IsNullOrEmpty(message))
             {
-                throw new InvalidEnumArgumentException(parameterName, Convert.ToInt32(input), typeof(T));
+                throw new GuardEnumOutOfRangeException(parameterName, Convert.ToInt32(input), typeof(T));
             }
-            throw new InvalidEnumArgumentException(message);
+            throw new GuardEnumOutOfRangeException(message);
         }
 
         return input;
@@ -92,16 +92,16 @@ public static partial class GuardClauseExtensions
     {
         if (rangeFrom.CompareTo(rangeTo) > 0)
         {
-            throw new ArgumentException(message ?? $"{nameof(rangeFrom)} should be less or equal than {nameof(rangeTo)}", parameterName);
+            throw new GuardOutOfRangeException(message ?? $"{nameof(rangeFrom)} should be less or equal than {nameof(rangeTo)}", parameterName);
         }
 
         if (input.Any(x => x.CompareTo(rangeFrom) < 0 || x.CompareTo(rangeTo) > 0))
         {
             if (string.IsNullOrEmpty(message))
             {
-                throw new ArgumentOutOfRangeException(parameterName, message ?? $"Input {parameterName} had out of range item(s)");
+                throw new GuardOutOfRangeException(message ?? $"Input {parameterName} had out of range item(s)", parameterName);
             }
-            throw new ArgumentOutOfRangeException(parameterName, message);
+            throw new GuardOutOfRangeException(message, parameterName);
         }
 
         return input;
@@ -153,16 +153,16 @@ public static partial class GuardClauseExtensions
     {
         if (rangeFrom.CompareTo(rangeTo) > 0)
         {
-            throw new ArgumentException(message ?? $"{nameof(rangeFrom)} should be less or equal than {nameof(rangeTo)}", parameterName);
+            throw new GuardOutOfRangeException(message ?? $"{nameof(rangeFrom)} should be less or equal than {nameof(rangeTo)}", parameterName);
         }
 
         if (input.CompareTo(rangeFrom) < 0 || input.CompareTo(rangeTo) > 0)
         {
             if (string.IsNullOrEmpty(message))
             {
-                throw new ArgumentOutOfRangeException(parameterName, $"Input {parameterName} was out of range");
+                throw new GuardOutOfRangeException($"Input {parameterName} was out of range", parameterName);
             }
-            throw new ArgumentOutOfRangeException(parameterName, message);
+            throw new GuardOutOfRangeException(message, parameterName);
         }
 
         return input;

@@ -25,7 +25,7 @@ public static partial class GuardClauseExtensions
         var m = Regex.Match(input, regexPattern);
         if (!m.Success || input != m.Value)
         {
-            throw new ArgumentException(message ?? $"Input {parameterName} was not in required format", parameterName);
+            throw new GuardInvalidException(message ?? $"Input {parameterName} was not in required format", parameterName);
         }
 
         return input;
@@ -46,7 +46,7 @@ public static partial class GuardClauseExtensions
     {
         if (!predicate(input))
         {
-            throw new ArgumentException(message ?? $"Input {parameterName} did not satisfy the options", parameterName);
+            throw new GuardInvalidException(message ?? $"Input {parameterName} did not satisfy the options", parameterName);
         }
 
         return input;
@@ -71,7 +71,7 @@ public static partial class GuardClauseExtensions
     {
         if (!await predicate(input))
         {
-            throw new ArgumentException(message ?? $"Input {parameterName} did not satisfy the options", parameterName);
+            throw new GuardInvalidException(message ?? $"Input {parameterName} did not satisfy the options", parameterName);
         }
 
         return input;

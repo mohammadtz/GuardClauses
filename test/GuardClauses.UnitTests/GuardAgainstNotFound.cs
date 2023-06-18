@@ -20,7 +20,7 @@ public class GuardAgainstNotFound
     public void ThrowsGivenNullValue()
     {
         object obj = null!;
-        Assert.Throws<NotFoundException>(() => Guard.Against.NotFound(1, obj, "null"));
+        Assert.Throws<GuardNotFoundException>(() => Guard.Against.NotFound(1, obj, "null"));
     }
 
     [Fact]
@@ -45,7 +45,7 @@ public class GuardAgainstNotFound
         string? xyz = null;
         var key = "mykey";
 
-        var exception = Assert.Throws<NotFoundException>(() => Guard.Against.NotFound(key, xyz));
+        var exception = Assert.Throws<GuardNotFoundException>(() => Guard.Against.NotFound(key, xyz));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);

@@ -19,7 +19,7 @@ public class GuardAgainstOutOfSQLDateRange
     {
         DateTime date = SqlDateTime.MinValue.Value.AddSeconds(-offsetInSeconds);
 
-        Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfSQLDateRange(date, nameof(date)));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfSQLDateRange(date, nameof(date)));
     }
 
     [Fact]
@@ -73,7 +73,7 @@ public class GuardAgainstOutOfSQLDateRange
     public void ErrorMessageMatchesExpected(string customMessage, string expectedMessage)
     {
         DateTime date = SqlDateTime.MinValue.Value.AddSeconds(-1);
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfSQLDateRange(date, nameof(date), customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfSQLDateRange(date, nameof(date), customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -86,7 +86,7 @@ public class GuardAgainstOutOfSQLDateRange
     public void ErrorMessageMatchesExpectedWhenNameNotExplicitlyProvided(string customMessage, string expectedMessage)
     {
         DateTime date = SqlDateTime.MinValue.Value.AddSeconds(-1);
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfSQLDateRange(date, message: customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfSQLDateRange(date, message: customMessage));
 
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -101,7 +101,7 @@ public class GuardAgainstOutOfSQLDateRange
     public void ExceptionParamNameMatchesExpected(string expectedParamName, string customMessage)
     {
         DateTime date = SqlDateTime.MinValue.Value.AddSeconds(-1);
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfSQLDateRange(date, expectedParamName, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfSQLDateRange(date, expectedParamName, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }

@@ -25,7 +25,7 @@ public class GuardAgainstOutOfRangeForEnum
     [InlineData(10)]
     public void ThrowsGivenOutOfRangeValue(int enumValue)
     {
-        var exception = Assert.Throws<InvalidEnumArgumentException>(() => Guard.Against.EnumOutOfRange<TestEnum>(enumValue, nameof(enumValue)));
+        var exception = Assert.Throws<GuardEnumOutOfRangeException>(() => Guard.Against.EnumOutOfRange<TestEnum>(enumValue, nameof(enumValue)));
         Assert.Equal(nameof(enumValue), exception.ParamName);
     }
 
@@ -48,7 +48,7 @@ public class GuardAgainstOutOfRangeForEnum
     [InlineData((TestEnum)10)]
     public void ThrowsGivenOutOfRangeEnum(TestEnum enumValue)
     {
-        var exception = Assert.Throws<InvalidEnumArgumentException>(() => Guard.Against.EnumOutOfRange(enumValue, nameof(enumValue)));
+        var exception = Assert.Throws<GuardEnumOutOfRangeException>(() => Guard.Against.EnumOutOfRange(enumValue, nameof(enumValue)));
         Assert.Equal(nameof(enumValue), exception.ParamName);
     }
 
@@ -83,7 +83,7 @@ public class GuardAgainstOutOfRangeForEnum
     [InlineData("Invalid enum value", "Invalid enum value")]
     public void ErrorMessageMatchesExpectedWhenInputIsEnum(string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<InvalidEnumArgumentException>(
+        var exception = Assert.Throws<GuardEnumOutOfRangeException>(
             () => Guard.Against.EnumOutOfRange((TestEnum)99, "parameterName", customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -96,7 +96,7 @@ public class GuardAgainstOutOfRangeForEnum
     public void ErrorMessageMatchesExpectedWhenInputIsEnumAndParamNameNotExplicitlyProvided(string customMessage, string expectedMessage)
     {
         var xyz = (TestEnum)99;
-        var exception = Assert.Throws<InvalidEnumArgumentException>(
+        var exception = Assert.Throws<GuardEnumOutOfRangeException>(
             () => Guard.Against.EnumOutOfRange(xyz, message: customMessage));
 
         Assert.NotNull(exception);
@@ -111,7 +111,7 @@ public class GuardAgainstOutOfRangeForEnum
     [InlineData(null, "Value must be correct")]
     public void ExceptionParamNameMatchesExpectedWhenInputIsEnum(string expectedParamName, string customMessage)
     {
-        var exception = Assert.Throws<InvalidEnumArgumentException>(
+        var exception = Assert.Throws<GuardEnumOutOfRangeException>(
             () => Guard.Against.EnumOutOfRange((TestEnum)99, expectedParamName, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
@@ -122,7 +122,7 @@ public class GuardAgainstOutOfRangeForEnum
     [InlineData("Invalid enum value", "Invalid enum value")]
     public void ErrorMessageMatchesExpectedWhenInputIsInt(string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<InvalidEnumArgumentException>(
+        var exception = Assert.Throws<GuardEnumOutOfRangeException>(
             () => Guard.Against.EnumOutOfRange<TestEnum>(99, "parameterName", customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
@@ -136,7 +136,7 @@ public class GuardAgainstOutOfRangeForEnum
     [InlineData(null, "Value must be correct")]
     public void ExceptionParamNameMatchesExpectedWhenInputIsInt(string expectedParamName, string customMessage)
     {
-        var exception = Assert.Throws<InvalidEnumArgumentException>(
+        var exception = Assert.Throws<GuardEnumOutOfRangeException>(
             () => Guard.Against.EnumOutOfRange<TestEnum>(99, expectedParamName, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);

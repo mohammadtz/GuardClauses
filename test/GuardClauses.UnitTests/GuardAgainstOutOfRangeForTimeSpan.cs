@@ -30,7 +30,7 @@ public class GuardAgainstOutOfRangeForTimeSpan
         var rangeFromTimeSpan = TimeSpan.FromSeconds(rangeFrom);
         var rangeToTimeSpan = TimeSpan.FromSeconds(rangeTo);
 
-        Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(inputTimeSpan, "index", rangeFromTimeSpan, rangeToTimeSpan));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(inputTimeSpan, "index", rangeFromTimeSpan, rangeToTimeSpan));
     }
 
     [Theory]
@@ -43,7 +43,7 @@ public class GuardAgainstOutOfRangeForTimeSpan
         var rangeFromTimeSpan = TimeSpan.FromSeconds(rangeFrom);
         var rangeToTimeSpan = TimeSpan.FromSeconds(rangeTo);
 
-        Assert.Throws<ArgumentException>(() => Guard.Against.OutOfRange(inputTimeSpan, "index", rangeFromTimeSpan, rangeToTimeSpan));
+        Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(inputTimeSpan, "index", rangeFromTimeSpan, rangeToTimeSpan));
     }
 
     [Theory]
@@ -70,7 +70,7 @@ public class GuardAgainstOutOfRangeForTimeSpan
         var rangeFromTimeSpan = TimeSpan.FromSeconds(3);
         var rangeToTimeSpan = TimeSpan.FromSeconds(1);
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.OutOfRange(inputTimeSpan, "parameterName", rangeFromTimeSpan, rangeToTimeSpan, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(inputTimeSpan, "parameterName", rangeFromTimeSpan, rangeToTimeSpan, customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -87,7 +87,7 @@ public class GuardAgainstOutOfRangeForTimeSpan
         var rangeFromTimeSpan = TimeSpan.FromSeconds(3);
         var rangeToTimeSpan = TimeSpan.FromSeconds(1);
 
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.OutOfRange(inputTimeSpan, expectedParamName, rangeFromTimeSpan, rangeToTimeSpan, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(inputTimeSpan, expectedParamName, rangeFromTimeSpan, rangeToTimeSpan, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }
@@ -101,7 +101,7 @@ public class GuardAgainstOutOfRangeForTimeSpan
         var rangeFromTimeSpan = TimeSpan.FromSeconds(0);
         var rangeToTimeSpan = TimeSpan.FromSeconds(1);
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(inputTimeSpan, "parameterName", rangeFromTimeSpan, rangeToTimeSpan, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(inputTimeSpan, "parameterName", rangeFromTimeSpan, rangeToTimeSpan, customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);
@@ -118,7 +118,7 @@ public class GuardAgainstOutOfRangeForTimeSpan
         var rangeFromTimeSpan = TimeSpan.FromSeconds(0);
         var rangeToTimeSpan = TimeSpan.FromSeconds(1);
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Against.OutOfRange(inputTimeSpan, expectedParamName, rangeFromTimeSpan, rangeToTimeSpan, customMessage));
+        var exception = Assert.Throws<GuardOutOfRangeException>(() => Guard.Against.OutOfRange(inputTimeSpan, expectedParamName, rangeFromTimeSpan, rangeToTimeSpan, customMessage));
         Assert.NotNull(exception);
         Assert.Equal(expectedParamName, exception.ParamName);
     }
