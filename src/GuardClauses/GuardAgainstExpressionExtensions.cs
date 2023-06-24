@@ -22,7 +22,7 @@ public static partial class GuardClauseExtensions
     {
         if (!func(input))
         {
-            throw new ArgumentException(message);
+            throw new GuardExpressionException(message, "");
         }
 
         return input;
@@ -45,7 +45,7 @@ public static partial class GuardClauseExtensions
     {
         if (!await func(input))
         {
-            throw new ArgumentException(message);
+            throw new GuardExpressionException(message);
         }
 
         return input;

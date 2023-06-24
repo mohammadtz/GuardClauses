@@ -33,7 +33,7 @@ public class GuardAgainstExpression
     [InlineData(10)]
     public void GivenIntegerWhenTheExpressionEvaluatesToFalseThrowsException(int test)
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.AgainstExpression((x) => x == 5, test, "Value is not equal to 10"));
+        Assert.Throws<GuardExpressionException>(() => Guard.Against.AgainstExpression((x) => x == 5, test, "Value is not equal to 10"));
     }
 
     [Theory]
@@ -47,7 +47,7 @@ public class GuardAgainstExpression
     [InlineData(1.1)]
     public void GivenDoubleWhenTheExpressionEvaluatesToFalseThrowsException(int test)
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.AgainstExpression((x) => x == 5.0, test, "Value is not equal to 1.1"));
+        Assert.Throws<GuardExpressionException>(() => Guard.Against.AgainstExpression((x) => x == 5.0, test, "Value is not equal to 1.1"));
     }
 
     [Theory]
@@ -61,7 +61,7 @@ public class GuardAgainstExpression
     [MemberData(nameof(GetCustomStruct))]
     public void GivenCustomStructWhenTheExpressionEvaluatesToFalseThrowsException(CustomStruct test)
     {
-        Assert.Throws<ArgumentException>(() => Guard.Against.AgainstExpression((x) => x.FieldName == "FailThis", test, "FieldValue is not matching"));
+        Assert.Throws<GuardExpressionException>(() => Guard.Against.AgainstExpression((x) => x.FieldName == "FailThis", test, "FieldValue is not matching"));
     }
 
     [Theory]
@@ -69,7 +69,7 @@ public class GuardAgainstExpression
     [InlineData("Please provide correct value", "Please provide correct value")]
     public void ErrorMessageMatchesExpected(string customMessage, string expectedMessage)
     {
-        var exception = Assert.Throws<ArgumentException>(() => Guard.Against.AgainstExpression(x => x == 1, 2, customMessage));
+        var exception = Assert.Throws<GuardExpressionException>(() => Guard.Against.AgainstExpression(x => x == 1, 2, customMessage));
         Assert.NotNull(exception);
         Assert.NotNull(exception.Message);
         Assert.Equal(expectedMessage, exception.Message);

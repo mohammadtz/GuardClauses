@@ -20,7 +20,7 @@
     <PackageReleaseNotes>
     Add more support for CallerArgumentExpression.
     </PackageReleaseNotes>
-    <Version>4.0.1</Version>
+    <Version>4.0.2</Version>
     <AssemblyName>Ardalis.GuardClauses</AssemblyName>
     <PackageIcon>icon.png</PackageIcon>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
