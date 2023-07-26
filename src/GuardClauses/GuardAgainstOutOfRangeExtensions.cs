@@ -92,16 +92,17 @@ public static partial class GuardClauseExtensions
     {
         if (rangeFrom.CompareTo(rangeTo) > 0)
         {
-            throw new GuardOutOfRangeException(message ?? $"{nameof(rangeFrom)} should be less or equal than {nameof(rangeTo)}", parameterName);
+            throw new GuardOutOfRangeException(
+                message ?? $"{nameof(rangeFrom)} should be less or equal than {nameof(rangeTo)}", parameterName, rangeFrom.ToString(), rangeTo.ToString());
         }
 
         if (input.Any(x => x.CompareTo(rangeFrom) < 0 || x.CompareTo(rangeTo) > 0))
         {
             if (string.IsNullOrEmpty(message))
             {
-                throw new GuardOutOfRangeException(message ?? $"Input {parameterName} had out of range item(s)", parameterName);
+                throw new GuardOutOfRangeException(message ?? $"Input {parameterName} had out of range item(s)", parameterName, rangeFrom.ToString(), rangeTo. ToString());
             }
-            throw new GuardOutOfRangeException(message, parameterName);
+            throw new GuardOutOfRangeException(message, parameterName, rangeFrom.ToString(), rangeTo.ToString());
         }
 
         return input;
@@ -153,16 +154,17 @@ public static partial class GuardClauseExtensions
     {
         if (rangeFrom.CompareTo(rangeTo) > 0)
         {
-            throw new GuardOutOfRangeException(message ?? $"{nameof(rangeFrom)} should be less or equal than {nameof(rangeTo)}", parameterName);
+            throw new GuardOutOfRangeException(
+                message ?? $"{nameof(rangeFrom)} should be less or equal than {nameof(rangeTo)}", parameterName, rangeFrom.ToString(), rangeTo.ToString());
         }
 
         if (input.CompareTo(rangeFrom) < 0 || input.CompareTo(rangeTo) > 0)
         {
             if (string.IsNullOrEmpty(message))
             {
-                throw new GuardOutOfRangeException($"Input {parameterName} was out of range", parameterName);
+                throw new GuardOutOfRangeException($"Input {parameterName} was out of range", parameterName, rangeFrom.ToString(), rangeTo.ToString());
             }
-            throw new GuardOutOfRangeException(message, parameterName);
+            throw new GuardOutOfRangeException(message, parameterName, rangeFrom.ToString(), rangeTo.ToString());
         }
 
         return input;

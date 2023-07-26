@@ -15,12 +15,12 @@
     <PackageProjectUrl>https://github.com/ardalis/guardclauses</PackageProjectUrl>
     <Description>A simple package by @ardalis and @nimblepros with guard clause helper methods. See docs for how to extend using your own extension methods defined in your project.</Description>
     <Summary>A simple package with guard clause helper methods. See docs for how to extend using your own extension methods.</Summary>
-    <RepositoryUrl>https://github.com/ardalis/guardclauses</RepositoryUrl>
+    <RepositoryUrl>https://github.com/mohammadtz/GuardClauses</RepositoryUrl>
     <PackageTags>guard clause clauses assert assertion</PackageTags>
     <PackageReleaseNotes>
     Add more support for CallerArgumentExpression.
     </PackageReleaseNotes>
-    <Version>4.0.2</Version>
+    <Version>4.0.5</Version>
     <AssemblyName>Ardalis.GuardClauses</AssemblyName>
     <PackageIcon>icon.png</PackageIcon>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
