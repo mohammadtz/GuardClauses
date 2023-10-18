@@ -6,7 +6,7 @@ public class GuardExpressionException : ArgumentException
 {
     public GuardExpressionException(string key) : base(default, key)
     {
-        key = key;
+        Key = key;
     }
     
     public GuardExpressionException(string message, string key) : base(message, key)

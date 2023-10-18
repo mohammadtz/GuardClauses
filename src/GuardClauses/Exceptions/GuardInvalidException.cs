@@ -6,7 +6,7 @@ public class GuardInvalidException : GuardNullException
 {
     public GuardInvalidException(string key) : base(default, key)
     {
-        key = key;
+        Key = key;
     }
     
     public GuardInvalidException(string message, string key) : base(message, key)

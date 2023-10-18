@@ -6,7 +6,7 @@ public class GuardNegativeOrZeroException : ArgumentException
 {
     public GuardNegativeOrZeroException(string key) : base("", paramName: key)
     {
-        key = key;
+        Key = key;
     }
     
     public GuardNegativeOrZeroException(string message, string key) : base(message, key)

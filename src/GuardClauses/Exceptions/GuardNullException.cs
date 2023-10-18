@@ -6,7 +6,7 @@ public class GuardNullException : ArgumentNullException
 {
     public GuardNullException(string key) : base(key)
     {
-        key = key;
+        Key = key;
     }
     
     public GuardNullException(string? message, string? key) 

@@ -6,7 +6,7 @@ public class GuardZeroException : ArgumentException
 {
     public GuardZeroException(string key) : base(default, key)
     {
-        key = key;
+        Key = key;
     }
     
     public GuardZeroException(string message, string key) : base(message, key)
